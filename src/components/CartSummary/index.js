@@ -1,4 +1,3 @@
-// Write your code here
 import CartContext from '../../context/CartContext'
 import './index.css'
 

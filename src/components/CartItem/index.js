@@ -17,8 +17,6 @@ const CartItem = props => (
       const {id, title, brand, quantity, price, imageUrl} = cartItemDetails
       const onRemoveCartItem = () => removeCartItem(id)
 
-      // TODO: Update the functionality to increment and decrement quantity of the cart item
-
       return (
         <li className="cart-item">
           <img className="cart-product-image" src={imageUrl} alt={title} />
@@ -55,7 +53,6 @@ const CartItem = props => (
                 type="button"
                 onClick={onRemoveCartItem}
                 aria-label="Remove"
-                data-testid="remove"
               >
                 Remove
               </button>
