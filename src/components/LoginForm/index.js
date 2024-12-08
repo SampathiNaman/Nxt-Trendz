@@ -51,6 +51,12 @@ class LoginForm extends Component {
     }
   }
 
+  skipLogin = async event => {
+    this.setState({username: 'rahul', password: 'rahul@2021'}, () =>
+      this.submitForm(event),
+    )
+  }
+
   renderPasswordField = () => {
     const {password} = this.state
 
@@ -121,6 +127,13 @@ class LoginForm extends Component {
           <div className="input-container">{this.renderPasswordField()}</div>
           <button type="submit" className="login-button">
             Login
+          </button>
+          <button
+            type="button"
+            className="login-button"
+            onClick={this.skipLogin}
+          >
+            Skip Login
           </button>
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
         </form>
