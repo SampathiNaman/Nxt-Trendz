@@ -1,183 +1,137 @@
-In this project, let's build a **Nxt Trendz - Cart Features** by applying the concepts we have learned till now.
+## Nxt-Trendz
 
-### Refer to the video below:
+This is an e-commerce web application built using React and integrated with a backend API for product management and user authentication. The app features product browsing, filtering, shopping cart management, and secure route navigation, all designed to provide a seamless shopping experience.
 
-<br/>
-<div style="text-align: center;">
-  <video style="max-width:70%;box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.12);outline:none;" loop="true" autoplay="autoplay" controls="controls" muted>
-    <source src="https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-output.mp4" type="video/mp4">
-  </video>
-</div>
-<br/>
+## Project Overview
 
-### Design Files
+This e-commerce web application provides users with the ability to browse and filter products, view product details, manage items in a shopping cart, and complete purchases. It is built using React for the frontend and communicates with a backend API to handle product data, user authentication, and cart functionality.
 
-<details>
-<summary>Click to view</summary>
+The application focuses on usability, performance, and secure authentication using JWT (JSON Web Tokens). Users must authenticate before accessing certain routes, and the app ensures secure interactions by protecting sensitive routes.
 
-- [Extra Small (Size < 576px) and Small (Size >= 576px)](https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-sm-output-v0.png)
-- [Medium (Size >= 768px), Large (Size >= 992px) and Extra Large (Size >= 1200px)](https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-lg-output.png)
+## Tech Stack
 
-</details>
+- **Frontend**: React.js
+- **Routing**: React Router
+- **Styling**: CSS, Bootstrap
+- **State Management**: React state management, Context API
+- **API Integration**: RESTful APIs
+- **Authentication**: JWT-based secure authentication
 
-### Set Up Instructions
+## Features
 
-<details>
-<summary>Click to view</summary>
+### Core Features
 
-- Download dependencies by running `npm install`
-- Start up the app using `npm start`
-</details>
+1. **User Authentication & Route Protection**
+   - Redirects unauthenticated users to the Login route when attempting to access protected pages (Home, Products, Cart).
+   - Authenticated users can freely access Home, Products, and Cart pages.
 
-### Completion Instructions
+2. **Product Listing & Filtering**
+   - Filters products by title, category, and rating.
+   - Supports multiple filters applied simultaneously.
+   - Displays a loader while fetching data.
+   - "No Products" view displayed if no results match the filters.
 
-<details>
-<summary>Functionality to be added</summary>
-<br/>
+3. **Product Details**
+   - Clicking on a product takes the user to the Product Details page.
+   - Allows users to adjust the quantity of the product they wish to buy.
+   - Displays similar products and product details.
 
-The app must have the following functionalities
+4. **Shopping Cart**
+   - Users can add products to their cart, adjust quantities, and remove items.
+   - Cart summary shows total price and item count.
+   - Supports quantity updates (increase/decrease) for each product.
+   - Cart items persist and are updated as the user interacts with the cart.
 
-- When an unauthenticated user tries to access the **Cart** Route, then the page should be navigated to **Login** Route
+5. **Responsive Design**
+   - Fully responsive design, optimized for both desktop and mobile devices.
 
-- Following are the features to be implemented
+6. **Error Handling & Loader Indicators**
+   - Displays failure views when API requests fail.
+   - Shows loaders during data fetching for a smooth user experience.
 
-  - Feature 1
+### Additional Features
 
-    - When an authenticated user tries to add the same product multiple times
-      - The quantity of the product should be updated accordingly, and the count of the cart items in the header should be remained same
+1. **Product Quantity Updates**
+   - If an authenticated user tries to add the same product multiple times, the app updates the quantity in the cart rather than adding a new entry.
 
-  - Feature 2
+2. **Cart Summary**
+   - Displays the total price and number of items in the cart at all times.
 
-    - The total amount and number of items in the cart should be displayed in the **Cart** Route
+3. **Clear Cart**
+   - "Remove All" button allows users to clear all items in the cart, showing an empty cart view.
 
-  - Feature 3
+4. **Error Recovery**
+   - If a product detail or product list request fails, users can continue shopping or return to previous views seamlessly.
 
-    - In each cart item in the cart
-      - When the plus icon is clicked, then the quantity of the product should be incremented by one
-      - When the minus icon is clicked, then the quantity of the product should be decremented by one
-      - When the quantity of the product is one and the minus icon is clicked, then the respective product should be removed from the cart
-      - Based on the quantity of the product, the product price and the Cart Summary, i.e the total cost should be updated accordingly
+## API Endpoints
 
-  - Feature 4
+### 1. **Products API**
+   - **URL:** `https://apis.ccbp.in/products`
+   - **Method:** `GET`
+   - **Description:** Fetches a list of products, with optional filters.
+   - **Query Parameters:**
+     - `category`: (Optional) Filters products by category.
+     - `rating`: (Optional) Filters products by rating.
+     - `title_search`: (Optional) Filters products by title.
+   - **Example Request:**
+     ```bash
+     GET https://apis.ccbp.in/products?category=4&rating=4&title_search=machine
+     ```
 
-    - When an authenticated user clicks on the remove button, cart item should be removed from the cart list
+### 2. **Product Details API**
+   - **URL:** `https://apis.ccbp.in/products/:id`
+   - **Method:** `GET`
+   - **Description:** Fetches detailed information for a specific product.
+   - **Path Parameters:**
+     - `id`: The unique ID of the product.
+   - **Example Request:**
+     ```bash
+     GET https://apis.ccbp.in/products/16
+     ```
 
-  - Feature 5
+### 3. **User Authentication API**
+   - **URL:** `https://apis.ccbp.in/auth/login`
+   - **Method:** `POST`
+   - **Description:** Authenticates the user and returns a JWT token.
+   - **Request Body:**
+     ```json
+     {
+       "username": "your-username",
+       "password": "your-password"
+     }
+     ```
 
-    - When an authenticated user clicks on the **Remove All** button, all the cart items should be removed from the cart and [Empty Cart View](https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-empty-cart-view.png) should be displayed
+## Installation
 
-- The `CartContext` has an object as a value with the following properties
-  - `cartList` - this key stores the cart items
-  - `removeAllCartItems` - this method is used to remove all the cart items in the `cartList`
-  - `addCartItem` - this method adds the cart item to the `cartList`
-  - `removeCartItem` - this method removes the cart item from the `cartList`
-  - `incrementCartItemQuantity` - this method increases the quantity of a product in the `cartList`
-  - `decrementCartItemQuantity` - this method decreases the quantity of a product in the `cartList`
+To run the project locally, follow these steps:
 
-</details>
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/e-commerce-web-app.git
+   ```
+2. Install the dependencies:
+   ```bash
+   cd e-commerce-web-app
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm start
+   ```
 
-<details>
-<summary>Components Structure</summary>
+## Usage
+Once the application is running, you can:
 
-<br/>
-<div style="text-align: center;">
-    <img src="https://assets.ccbp.in/frontend/content/react-js/nxt-trendz-cart-features-component-structure-breakdown.png" alt="component structure breakdown" style="max-width:100%;box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.12)">
-</div>
-<br/>
+- Browse products and filter them by category, rating, and title.
+- View product details and adjust the quantity.
+- Manage your cart by adding, removing, or updating products.
+- Securely authenticate and navigate between routes.
 
-</details>
+## Contributing
+Project is open for contributions. Please fork the repository and submit a pull request.
 
-<details>
-<summary>Implementation Files</summary>
-<br/>
+## License
+This project is licensed under the [MIT License](LICENSE).
 
-Use these files to complete the implementation:
-
-- `src/App.js`
-- `src/components/Cart/index.js`
-- `src/components/Cart/index.css`
-- `src/components/CartItem/index.js`
-- `src/components/CartItem/index.css`
-- `src/components/CartSummary/index.js`
-- `src/components/CartSummary/index.css`
-</details>
-
-### Quick Tips
-
-<details>
-<summary>Click to view</summary>
-<br>
-
-- The `line-height` CSS property sets the height of a line box. It's commonly used to set the distance between lines of text
-
-  ```
-  line-height: 1.5;
-  ```
-
-    <br/>
-    <img src="https://assets.ccbp.in/frontend/react-js/line-height-img.png" alt="line height" style="width:90%; max-width: 600px;"/>
-
-- The array method `find()` returns the first item's value that satisfies the provided testing function. If no item is found, it returns `undefined`
-
-  **Syntax**: `arr.find(Testing Function)`
-
-</details>
-
-### Important Note
-
-<details>
-<summary>Click to view</summary>
-
-<br/>
-
-**The following instructions are required for the tests to pass**
-
-- `BsPlusSquare`, `BsDashSquare` icons from `react-icons` should be used for **plus** and **minus** buttons in cart item
-- The Cart Item should consist of two HTML button elements with data-testid attribute values as **plus** and **minus** respectively
-- `AiFillCloseCircle` icon from react-icons should be used for **remove** button in cartItem
-- The Cart Item should consist of an HTML button element with data-testid attribute values as **remove**
-- The product image in **Cart Item** Route should have the alt as `title` of the product
-
-- Prime User credentials
-
-  ```text
-   username: rahul
-   password: rahul@2021
-  ```
-
-- Non-Prime User credentials
-
-  ```text
-   username: raja
-   password: raja@2021
-  ```
-
-</details>
-
-### Resources
-
-<details>
-<summary>Colors</summary>
-
-<br/>
-
-<div style="background-color: #0b69ff; width: 150px; padding: 10px; color: white">Hex: #0b69ff</div>
-<div style="background-color: #171f46; width: 150px; padding: 10px; color: white">Hex: #171f46</div>
-<div style="background-color: #616e7c; width: 150px; padding: 10px; color: white">Hex: #616e7c</div>
-<div style="background-color: #ffffff; width: 150px; padding: 10px; color: black">Hex: #ffffff</div>
-
-</details>
-
-<details>
-<summary>Font-families</summary>
-
-- Roboto
-
-</details>
-
-> ### _Things to Keep in Mind_
->
-> - All components you implement should go in the `src/components` directory.
-> - Don't change the component folder names as those are the files being imported into the tests.
-> - **Do not remove the pre-filled code**
-> - Want to quickly review some of the concepts you’ve been learning? Take a look at the Cheat Sheets.
+## Acknowledgments
+Thanks to [CCBP APIs](https://apis.ccbp.in/) for providing API endpoints.
